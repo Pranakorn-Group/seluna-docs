@@ -8,6 +8,8 @@ import {
 import { notFound } from 'next/navigation';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { Popup, PopupContent, PopupTrigger } from 'fumadocs-twoslash/ui';
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
 }) {
@@ -33,6 +35,7 @@ export default async function Page(props: {
           Popup,
           PopupContent,
           PopupTrigger,
+          img: (props) => <ImageZoom {...(props as any)} />,
         }} />
       </DocsBody>
     </DocsPage>
