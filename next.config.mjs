@@ -6,7 +6,7 @@ const withMDX = createMDX();
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
-  serverExternalPackages: ["typescript", "twoslash"],
+  serverExternalPackages: ["typescript", "twoslash", "ts-morph", "fumadocs-typescript"],
   productionBrowserSourceMaps: false,
   images: {
     unoptimized: true,

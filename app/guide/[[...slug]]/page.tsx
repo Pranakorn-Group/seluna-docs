@@ -8,7 +8,6 @@ import {
 import { notFound } from 'next/navigation';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { Popup, PopupContent, PopupTrigger } from 'fumadocs-twoslash/ui';
-import { AutoTypeTable } from 'fumadocs-typescript/ui';
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
 }) {
@@ -31,7 +30,6 @@ export default async function Page(props: {
       <DocsBody>
         <MDX components={{
           ...defaultMdxComponents,
-          AutoTypeTable,
           Popup,
           PopupContent,
           PopupTrigger,
