@@ -39,7 +39,7 @@ export function Footer() {
                             </Link>
                             <span className="text-muted-foreground/50">&amp;</span>
                             <Link 
-                                href="https://contact.phattaradit.dev/" 
+                                href="https://phattaradit.dev/" 
                                 target="_blank" 
                                 rel="noopener noreferrer" 
                                 className="text-pink-500 dark:text-pink-400 font-semibold hover:text-pink-600 transition-colors"
