@@ -7,7 +7,9 @@ import { Rocket, Users } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 export default function Home() {
+    const { resolvedTheme } = useTheme();
     const [heroHeight, setHeroHeight] = useState(800);
 
     useEffect(() => {
@@ -48,7 +50,10 @@ export default function Home() {
                     </motion.div>
                 </div>
 
-                <Spotlight className="-top-20 -left-12 lg:left-80 lg:-top-30" fill="rgba(255, 255, 255, 0.8)" />
+                <Spotlight
+                    className="-top-20 -left-12 lg:left-80 lg:-top-30"
+                    fill={resolvedTheme === "dark" ? "rgba(255,255,255,0.8)" : "rgba(99,102,241,0.4)"}
+                />
 
                 <div className="text-center max-w-2xl z-2">
                     <AnimatedGradientText className="flex items-center gap-2 px-3">
@@ -63,7 +68,7 @@ export default function Home() {
                             Seluna Cloud
                         </span>
                     </h1>
-                    <p className="mt-6 text-[17px] md:text-md bg-gradient-to-r from-neutral-300 to-neutral-100 bg-clip-text text-transparent flex flex-col items-center">
+                    <p className="mt-6 text-[17px] md:text-md bg-gradient-to-r from-neutral-600 to-neutral-800 dark:from-neutral-300 dark:to-neutral-100 bg-clip-text text-transparent flex flex-col items-center">
                         <span className="w-full md:max-w-[500px]">
                             {" "}
                             ศูนย์รวมคู่มือการใช้งาน Seluna Cloud ที่ออกแบบมาอย่างครบถ้วน ครอบคลุมทั้งฝั่งผู้ดูแลระบบ
