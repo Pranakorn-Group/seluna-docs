@@ -27,7 +27,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning style={{ fontFamily: 'var(--font-ibm-plex-sans-thai), sans-serif' }}>
       <body className={`${ibmPlexSansThai.variable} flex flex-col min-h-screen`}>
-        <RootProvider theme={{ defaultTheme: "dark" }}>{children}</RootProvider>
+        <RootProvider theme={{ defaultTheme: "dark", disableTransitionOnChange: false }}>{children}</RootProvider>
       </body>
     </html>
   );
