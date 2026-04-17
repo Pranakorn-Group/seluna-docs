@@ -3,10 +3,10 @@ import type { ReactNode } from 'react';
 
 export const metadata: Metadata = {
     title: {
-        template: '%s | Blog',
+        template: '%s | Seluna Cloud Blog',
         default: 'Blog',
     },
-    description: 'Updates, release notes, and news',
+    description: 'บทความและข่าวสารการอัปเดตเกี่ยวกับ Seluna Cloud',
     openGraph: {
         images: {
             type: 'image/png',

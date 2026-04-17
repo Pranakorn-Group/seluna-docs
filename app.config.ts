@@ -3,5 +3,5 @@ export interface AppConfig {
 }
 
 export const config: AppConfig = {
-  repository: "tiramisulabs/seyfert",
+  repository: "Pranakorn-Group/seluna-docs",
 } as const;

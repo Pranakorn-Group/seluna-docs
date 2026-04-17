@@ -2,7 +2,8 @@ import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import type { ReactNode } from "react";
 import { baseOptions } from "@/app/layout.config";
 import { guideSource } from "@/lib/source";
-import { config } from "@/app.config";
+import { AiChatTrigger } from "@/components/ui/ai-chat-trigger";
+import AiChatFab from "@/components/ui/ai-chat";
 
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -12,9 +13,15 @@ export default function Layout({ children }: { children: ReactNode }) {
         {...baseOptions}
         sidebar={{
           className: "font-medium !w-[var(--fd-sidebar-width)] !items-start",
+          banner: (
+            <div className=" pb-1">
+              <AiChatTrigger />
+            </div>
+          ),
         }}
         // githubUrl={`https://github.com/${config.repository}`}
       >
+            <AiChatFab />
         {children}
       </DocsLayout>
   );

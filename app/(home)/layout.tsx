@@ -5,12 +5,12 @@ import { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "Seyfert | The Black Magic Framework",
-  description: 'Powerful Discord Bots Made Simple with Seyfert',
+  title: "Seluna | Documentation for Seluna Cloud",
+  description: 'เอกสารการใช้งานระบบ e-commerce ของ Seluna Cloud',
   openGraph: {
     images: {
         type: 'image/png',
-        url: './opengraph-image.png'
+        url: './banner.png'
     },
     type: 'website'
 }

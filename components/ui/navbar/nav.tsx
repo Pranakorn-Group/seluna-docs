@@ -6,9 +6,10 @@ import { NavMenu } from "./nav-menu";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Moon, Sun, Menu, Search } from "lucide-react";
+import { Moon, Sun, Menu, Search, Sparkles } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useSearchContext } from "fumadocs-ui/contexts/search";
+import { useAiChat } from "@/components/ui/ai-chat-provider";
 
 import {
   Sheet,
@@ -65,6 +66,7 @@ export default function Navbar() {
   const [sheetOpen, setSheetOpen] = useState(false);
   const pathname = usePathname();
   const { setOpenSearch } = useSearchContext();
+  const { setOpen: setAiOpen } = useAiChat();
   const isHomePage = pathname === "/";
 
   useEffect(() => {
@@ -151,7 +153,18 @@ export default function Navbar() {
               <kbd className="h-5 px-1.5 rounded border bg-background font-mono text-[10px] flex items-center">K</kbd>
             </div>
           </button>
-          <ThemeToggle />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setAiOpen(true)}
+            aria-label="Seluna AI"
+            className="text-muted-foreground hover:text-indigo-400 transition-colors"
+          >
+            <Sparkles className="!w-4.5 !h-4.5" />
+          </Button>
+          <div className="hidden md:inline-flex ">
+          <ThemeToggle  />
+          </div>
 
           {/* Mobile hamburger */}
           <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>

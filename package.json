@@ -1,13 +1,15 @@
 {
-  "name": "seyfert-docs",
+  "name": "seluna-docs",
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "build:index": "node scripts/build-rag-index.mjs",
+    "prebuild": "node scripts/build-rag-index.mjs",
     "build": "next build",
     "build:cf": "opennextjs-cloudflare build",
     "deploy": "bun run build:cf && wrangler deploy",
     "preview": "bun run build:cf && wrangler dev",
-    "dev": "next dev",
+    "dev": "node scripts/build-rag-index.mjs && next dev",
     "lint": "eslint .",
     "postinstall": "fumadocs-mdx",
     "start": "next start"
