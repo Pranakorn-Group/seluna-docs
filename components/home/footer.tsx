@@ -15,8 +15,8 @@ export function Footer() {
                             <Link href="https://sirayuth.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
                                 Sirayuth
                             </Link>{},{" "}
-                            <Link href="https://phattaradit.dev/" target="_blank" rel="noopener noreferrer" className="text-pink-500 underline">
-                                NongDrraeam
+                            <Link href="https://contact.phattaradit.dev/" target="_blank" rel="noopener noreferrer" className="text-pink-500 underline">
+                                Nongdrream
                             </Link>
                         </h2>
                         <p className="text-muted-foreground text-xs sm:text-sm">
