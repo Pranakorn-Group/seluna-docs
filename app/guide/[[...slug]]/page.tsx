@@ -8,7 +8,12 @@ import {
 import { notFound } from 'next/navigation';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { Popup, PopupContent, PopupTrigger } from 'fumadocs-twoslash/ui';
+import { Callout } from 'fumadocs-ui/components/callout';
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Card, Cards } from 'fumadocs-ui/components/card';
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -32,6 +37,13 @@ export default async function Page(props: {
       <DocsBody>
         <MDX components={{
           ...defaultMdxComponents,
+          Callout,
+          Steps,
+          Step,
+          Tabs,
+          Tab,
+          Cards,
+          Card,
           Popup,
           PopupContent,
           PopupTrigger,
