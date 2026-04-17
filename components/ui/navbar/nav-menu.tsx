@@ -9,7 +9,8 @@ import Link from 'next/link'
 
 const links = [
     { href: "/guide", label: "แนะนำการใช้งาน" },
-    { href: "/blog", label: "บทความ" },
+    { href: "/changelog", label: "การอัพเดตระบบ" },
+    { href: "/blog", label: "บทความ" }
 ];
 
 export const NavMenu = (props: NavigationMenuProps) => (
