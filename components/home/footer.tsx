@@ -13,7 +13,10 @@ export function Footer() {
                         <h2 className="text-base sm:text-lg font-medium tracking-tight">
                             Made with 🌙 by{" "}
                             <Link href="https://sirayuth.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
-                                sirayuth
+                                Sirayuth
+                            </Link>{},{" "}
+                            <Link href="https://phattaradit.dev/" target="_blank" rel="noopener noreferrer" className="text-pink-500 underline">
+                                NongDrraeam
                             </Link>
                         </h2>
                         <p className="text-muted-foreground text-xs sm:text-sm">
