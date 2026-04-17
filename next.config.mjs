@@ -9,6 +9,7 @@ const config = {
   serverExternalPackages: ["typescript", "twoslash"],
   productionBrowserSourceMaps: false,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         hostname: "avatars.githubusercontent.com",

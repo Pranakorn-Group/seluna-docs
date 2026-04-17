@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "build:cf": "next build && opennextjs-cloudflare build",
+    "deploy": "bun run build:cf && wrangler deploy",
+    "preview": "bun run build:cf && wrangler dev",
     "dev": "next dev",
     "lint": "eslint .",
     "postinstall": "fumadocs-mdx",
@@ -44,6 +47,8 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1",
+    "wrangler": "^4",
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.2",
     "@tailwindcss/postcss": "^4.1.18",

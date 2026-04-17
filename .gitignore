@@ -26,6 +26,8 @@ yarn-error.log*
 # others
 .env*.local
 .vercel
+.wrangler
+.open-next
 next-env.d.ts
 
 # api reference (this is generated on vercel side)
