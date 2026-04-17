@@ -26,7 +26,7 @@ export const useAiChat = () => useContext(Ctx)
 // ─── Markdown renderer ────────────────────────────────────────────────────────
 
 function renderInline(text: string): ReactNode[] {
-  return text.split(/(\*\*[^*]+\*\*|`[^`]+`|\*[^*]+\*)/g).map((part, i) => {
+  return text.split(/(\*\*[^*]+\*\*|`[^`]+`|\*[^*]+\*|\[[^\]]+\]\([^)]+\))/g).map((part, i) => {
     if (part.startsWith('**') && part.endsWith('**'))
       return <strong key={i} className="font-semibold text-white">{part.slice(2, -2)}</strong>
     if (part.startsWith('`') && part.endsWith('`'))
@@ -37,6 +37,14 @@ function renderInline(text: string): ReactNode[] {
       )
     if (part.startsWith('*') && part.endsWith('*'))
       return <em key={i}>{part.slice(1, -1)}</em>
+    const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/)
+    if (linkMatch)
+      return (
+        <a key={i} href={linkMatch[2]} target="_blank" rel="noopener noreferrer"
+          className="text-white underline underline-offset-2 decoration-white/40 hover:decoration-white transition-all">
+          {linkMatch[1]}
+        </a>
+      )
     return part
   })
 }

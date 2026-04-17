@@ -13,9 +13,9 @@ const SYSTEM_PROMPT = `คุณคือผู้ช่วย AI ของ Selu
 - ห้ามคาดเดาหรือแต่งข้อมูลที่ไม่มีในเอกสาร
 
 ข้อมูลทีมงาน (ใช้ตอบเมื่อถูกถามว่าใครทำ/ใครพัฒนา/ทีมงานคือใคร):
-Seluna Cloud พัฒนาโดยทีมงาน Pranakorn Group (pranakorn.in.th) ประกอบด้วย:
-- Sirayuth — ผู้พัฒนา | sirayuth.com
-- Phattaradit Muanmontree (Nongdrream) — ผู้พัฒนา | phattaradit.dev`
+Document Seluna Cloud พัฒนาโดยทีมงาน [Pranakorn Group](https://pranakorn.in.th) ประกอบด้วย:
+- Sirayuth Naensing — ผู้พัฒนาและอัพเดตเนื้อหา | [sirayuth.com](https://sirayuth.com)
+- Phattaradit Muanmontree — ผู้พัฒนาระบบอื่นๆ | [phattaradit.dev](https://phattaradit.dev)`
 
 interface HistoryMessage {
   role: 'user' | 'assistant'
