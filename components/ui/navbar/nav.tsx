@@ -4,20 +4,48 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { NavMenu } from "./nav-menu";
 import Image from "next/image";
-import logo from "@/public/android-chrome-512x512.png";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { Github01Icon } from "@hugeicons/core-free-icons";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { config } from "@/app.config";
-import { SunIcon } from "lucide-react";
+import { Moon, Sun, Menu } from "lucide-react";
+import { useTheme } from "next-themes";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
 const SCROLL_THRESHOLD = 50;
 
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return <div className="w-9 h-9" />;
+
+  return (
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      aria-label="Toggle theme"
+    >
+      {theme === "dark" ? (
+        <Sun className="!w-5 !h-5" />
+      ) : (
+        <Moon className="!w-5 !h-5" />
+      )}
+    </Button>
+  );
+}
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
 
@@ -44,6 +72,10 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    setSheetOpen(false);
+  }, [pathname]);
+
   if (!isLoaded) return null;
 
   return (
@@ -63,7 +95,7 @@ export default function Navbar() {
     >
       <div
         className={cn(
-          " backdrop-blur-xs bg-background/70 w-full h-full absolute top-0 left-0 -z-10",
+          "backdrop-blur-xs bg-background/70 w-full h-full absolute top-0 left-0 -z-10",
           isHomePage && isScrolled ? "rounded-lg border" : "rounded-none border-b"
         )}
       />
@@ -80,24 +112,37 @@ export default function Navbar() {
           <NavMenu className="hidden md:block" />
         </div>
 
-        <div className="flex items-center gap-3">
-          {/* <a
-            href={`https://github.com/${config.repository}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Button
-              variant="ghost"
-              size="icon"
-              className="hidden sm:inline-flex cursor-pointer"
-            >
-              <HugeiconsIcon icon={Github01Icon} className="w-5! h-5! " />
-            </Button>
-          </a> */}
+        <div className="flex items-center gap-1">
+          <ThemeToggle />
 
-          {/* <Button size="icon" variant="outline">
-                        <SunIcon className="!w-5 !h-5" />
-                    </Button> */}
+          {/* Mobile hamburger */}
+          <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden"
+                aria-label="Open menu"
+              >
+                <Menu className="!w-5 !h-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-64">
+              <SheetHeader>
+                <SheetTitle>
+                  <Link href="/" onClick={() => setSheetOpen(false)}>
+                    <div className="flex items-center gap-2">
+                      <Image src={"/android-chrome-512x512.png"} alt="Logo" width={24} height={24} />
+                      <span className="font-bold">Seluna</span>
+                    </div>
+                  </Link>
+                </SheetTitle>
+              </SheetHeader>
+              <div className="px-4 pt-4">
+                <NavMenu data-orientation="vertical" orientation="vertical" />
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </nav>
