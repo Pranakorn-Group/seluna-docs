@@ -1,4 +1,5 @@
 import { baseOptions } from "@/app/layout.config";
+import { LenisProvider } from "@/components/provider/LenisProvider";
 import Navbar from "@/components/ui/navbar/nav";
 import { HomeLayout } from "fumadocs-ui/layouts/home";
 import { Metadata } from "next";
@@ -26,7 +27,9 @@ export default function Layout({ children }: { children: ReactNode }) {
       }}
       className="py-0"
     >
+      <LenisProvider>
       {children}
+      </LenisProvider>
     </HomeLayout>
   );
 }

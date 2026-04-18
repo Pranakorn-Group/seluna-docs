@@ -4,6 +4,7 @@ import { baseOptions } from "@/app/layout.config";
 import { guideSource } from "@/lib/source";
 import { AiChatTrigger } from "@/components/ui/ai-chat-trigger";
 import AiChatFab from "@/components/ui/ai-chat";
+import { LenisProvider } from "@/components/provider/LenisProvider";
 
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -21,8 +22,12 @@ export default function Layout({ children }: { children: ReactNode }) {
         }}
         // githubUrl={`https://github.com/${config.repository}`}
       >
+              <LenisProvider>
+
+        
             <AiChatFab />
         {children}
+              </LenisProvider>
       </DocsLayout>
   );
 }
