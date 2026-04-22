@@ -200,11 +200,11 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50 ;
+    @apply border-border outline-ring/50 transition-colors duration-500;
   }
 
   body {
-    @apply bg-background text-foreground ;
+    @apply bg-background text-foreground transition-colors duration-500;
   }
 }
 
@@ -301,10 +301,25 @@
   animation-play-state: paused;
 }
 
+/* Custom Webkit Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
 
+::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
+::-webkit-scrollbar-thumb {
+  background: rgba(236, 72, 153, 0.5); /* transparent pink */
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(236, 72, 153, 0.8); /* less transparent on hover */
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
