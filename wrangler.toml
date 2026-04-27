@@ -1,7 +1,16 @@
-name = 'seluna-cloud-docs'
+name = 'seluna-docs'
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
 main = ".open-next/worker.js"
+
+# Environment variables (non-secret)
+# ค่าเหล่านี้จะติดไปกับทุก deploy ไม่หายเหมือนตั้งใน Dashboard
+[vars]
+TYPHOON_MODEL = "typhoon-v2.5-30b-a3b-instruct"
+
+# สำหรับ TYPHOON_API_KEY ให้ใช้ command:
+#   npx wrangler secret put TYPHOON_API_KEY --project-name seluna-docs
+# Secrets จะเก็บอย่างปลอดภัยบน CF และไม่หายเมื่อ deploy ใหม่
 
 [assets]
 directory = ".open-next/assets"
