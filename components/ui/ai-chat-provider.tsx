@@ -10,7 +10,7 @@ import {
 } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { AnimatePresence, motion } from 'motion/react'
-import { Bot, Send, Sparkles, X } from 'lucide-react'
+import { Send, Sparkles, X } from 'lucide-react'
 import Image from 'next/image'
 
 // ─── Context ─────────────────────────────────────────────────────────────────
@@ -129,6 +129,31 @@ function TypingDots() {
   )
 }
 
+function splitGraphemes(text: string) {
+  if (typeof Intl !== 'undefined' && 'Segmenter' in Intl) {
+    const Segmenter = Intl.Segmenter as new (
+      locale?: string,
+      options?: { granularity: 'grapheme' },
+    ) => Intl.Segmenter
+    return Array.from(
+      new Segmenter('th', { granularity: 'grapheme' }).segment(text),
+      segment => segment.segment,
+    )
+  }
+
+  return Array.from(text)
+}
+
+function getAssistantDelta(raw: string) {
+  try {
+    return JSON.parse(raw)?.choices?.[0]?.delta?.content ?? ''
+  } catch {
+    return ''
+  }
+}
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+
 // ─── Message bubble ───────────────────────────────────────────────────────────
 
 function Bubble({ msg }: { msg: Message }) {
@@ -142,9 +167,7 @@ function Bubble({ msg }: { msg: Message }) {
     >
       {!isUser && (
         <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center flex-shrink-0 mb-0.5">
-          {/* <Bot className="w-3 h-3 text-white" /> */}
-                  <Image src="/android-chrome-512x512.png" alt="Seluna Logo" className="h-4 w-4" width={16} height={16} />
-
+          <Image src="/android-chrome-512x512.png" alt="Seluna Logo" className="h-4 w-4" width={16} height={16} />
         </div>
       )}
       <div
@@ -228,24 +251,45 @@ function AiChatDialog() {
       const reader = res.body.getReader()
       const dec = new TextDecoder()
       let acc = ''
+      let buffer = ''
 
       while (true) {
         const { done, value } = await reader.read()
-        if (done) break
-        for (const line of dec.decode(value).split('\n')) {
+        buffer += done ? dec.decode() : dec.decode(value, { stream: true })
+
+        const lines = buffer.split(/\r?\n/)
+        buffer = lines.pop() ?? ''
+
+        for (const line of lines) {
           if (!line.startsWith('data: ')) continue
           const raw = line.slice(6).trim()
-          if (raw === '[DONE]') continue
-          try {
-            acc += JSON.parse(raw)?.choices?.[0]?.delta?.content ?? ''
-            setMessages(prev => {
-              const c = [...prev]
-              c[c.length - 1] = { role: 'assistant', content: acc, streaming: true }
-              return c
-            })
-          } catch {}
+          if (!raw || raw === '[DONE]') continue
+          acc += getAssistantDelta(raw)
         }
+
+        if (done) break
       }
+
+      for (const line of buffer.split(/\r?\n/)) {
+        if (!line.startsWith('data: ')) continue
+        const raw = line.slice(6).trim()
+        if (!raw || raw === '[DONE]') continue
+        acc += getAssistantDelta(raw)
+      }
+
+      const graphemes = splitGraphemes(acc)
+      let visible = ''
+
+      for (const grapheme of graphemes) {
+        visible += grapheme
+        setMessages(prev => {
+          const c = [...prev]
+          c[c.length - 1] = { role: 'assistant', content: visible, streaming: true }
+          return c
+        })
+        await sleep(grapheme === '\n' ? 24 : 10)
+      }
+
       setMessages(prev => {
         const c = [...prev]
         c[c.length - 1] = { role: 'assistant', content: acc, streaming: false }

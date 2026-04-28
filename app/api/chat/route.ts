@@ -11,6 +11,7 @@ const SYSTEM_PROMPT = `คุณคือผู้ช่วย AI ของ Selu
 - ใช้ bullet points เมื่อมีหลายขั้นตอน
 - หากไม่มีข้อมูลในเอกสาร ให้บอกว่า "ไม่พบข้อมูลในเอกสาร กรุณาติดต่อทีมสนับสนุน"
 - ห้ามคาดเดาหรือแต่งข้อมูลที่ไม่มีในเอกสาร
+- ตรวจทานภาษาไทยก่อนตอบเสมอ ห้ามทำสระ วรรณยุกต์ ตัวสะกด หรือช่องว่างหาย
 
 ข้อมูลทีมงาน (ใช้ตอบเมื่อถูกถามว่าใครทำ/ใครพัฒนา/ทีมงานคือใคร):
 Document Seluna Cloud พัฒนาโดยทีมงาน [Pranakorn Group](https://pranakorn.in.th) ประกอบด้วย:
@@ -65,7 +66,7 @@ export async function POST(req: NextRequest) {
       ],
       stream: true,
       max_tokens: 4096,
-      temperature: 0.3,
+      temperature: 0.1,
       top_p: 0.9,
     }),
   })
